@@ -1,29 +1,17 @@
 import { Input } from "@/components";
-import { RootState } from "@/redux";
-import { FormEvent, useState } from "react";
-import { connect, ConnectedProps } from "react-redux";
-import { login } from "./user-authentication-reducer";
+import { FormEvent } from "react";
 
-const mapStateToProps = (state: RootState) => ({ ...state });
+type Props = {
+  value: { email: string; password: string };
+  handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  handleChange: (_: { name: string; value: string }) => void;
+};
 
-const mapDispatchToProps = { login };
-
-const connector = connect(mapStateToProps, mapDispatchToProps);
-
-type Props = ConnectedProps<typeof connector>;
-
-function SignIn_({ login }: Props) {
-  const [{ email, password }, setValue] = useState({
-    email: "",
-    password: "",
-  });
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    login(email);
-  };
-
+export function UserAuthenticationComponent({
+  value,
+  handleSubmit,
+  handleChange,
+}: Props) {
   return (
     <div className="w-full max-w-lg px-8">
       <div className="bg-white rounded-lg shadow-sm p-8">
@@ -33,9 +21,9 @@ function SignIn_({ login }: Props) {
           <Input
             id="email"
             type="email"
-            value={email}
+            value={value.email}
             onChange={(e) =>
-              setValue((prev) => ({ ...prev, email: e.target.value }))
+              handleChange({ name: "email", value: e.target.value })
             }
             placeholder="you@example.com"
           />
@@ -43,9 +31,9 @@ function SignIn_({ login }: Props) {
           <Input
             id="password"
             type="password"
-            value={password}
+            value={value.password}
             onChange={(e) =>
-              setValue((prev) => ({ ...prev, password: e.target.value }))
+              handleChange({ name: "password", value: e.target.value })
             }
             placeholder="••••••••"
           />
@@ -61,5 +49,3 @@ function SignIn_({ login }: Props) {
     </div>
   );
 }
-
-export const SignIn = connector(SignIn_);

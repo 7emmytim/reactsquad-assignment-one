@@ -1,29 +1,9 @@
-import { RootState } from "@/redux";
-import { useEffect } from "react";
-import { connect, ConnectedProps } from "react-redux";
-import { logout } from "../user-authentication";
-import { fetchUserProfileRequest } from "./user-profile-reducer";
+import { UserProfileProps } from "./user-profile-container";
 
-const mapStateToProps = (state: RootState) => ({ ...state.userProfile });
-
-const mapDispatchToProps = { fetchUserProfileRequest, logout };
-
-const connector = connect(mapStateToProps, mapDispatchToProps);
-
-type Props = ConnectedProps<typeof connector>;
-
-export function UserProfile_({
-  fetchUserProfileRequest,
+export function UserProfileComponent({
   logout,
-  isLoading,
   data,
-}: Props) {
-  useEffect(() => {
-    fetchUserProfileRequest();
-  }, [fetchUserProfileRequest]);
-
-  if (isLoading) return "Loading...";
-
+}: Omit<UserProfileProps, "fetchUserProfileRequest" | "isLoading">) {
   return (
     <div className="max-w-2xl mx-auto text-center text-2xl">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
@@ -44,12 +24,10 @@ export function UserProfile_({
 
       <button
         onClick={() => logout()}
-        className="bg-red-400 mt-20 text-white rounded-sm py-1 px-3 cursor-pointer"
+        className="bg-red-400 mt-20 text-white rounded-sm text-base py-1 px-3 cursor-pointer"
       >
         Logout
       </button>
     </div>
   );
 }
-
-export const UserProfile = connector(UserProfile_);

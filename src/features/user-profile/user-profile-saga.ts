@@ -1,10 +1,10 @@
 import { call, put, takeEvery } from "redux-saga/effects";
+import { fetchUserProfileApi } from "./user-profile-api";
 import {
   fetchUserProfileFailure,
   fetchUserProfileRequest,
   fetchUserProfileSuccess
 } from "./user-profile-reducer";
-import { fetchUserProfileApi } from "./user-profile.api";
 
 // --- HANDLER ---
 function* handleFetchUserProfile(): Generator {

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { UserProfile } from "./user-profile.api";
+import { UserProfile } from "./user-profile-api";
 
-const slice = 'userProfile';
+export const userProfileSlice = 'userProfile';
 
 const initialState: {
   data: UserProfile | null
@@ -13,8 +13,8 @@ const initialState: {
   error: null,
 };
 
-export const { actions, reducer } = createSlice({
-  name: slice,
+const { actions, reducer } = createSlice({
+  name: userProfileSlice,
   initialState,
   reducers: {
     fetchUserProfileRequest: (state) => {
@@ -36,7 +36,5 @@ export const {
   fetchUserProfileRequest,
   fetchUserProfileSuccess,
   fetchUserProfileFailure
-} = actions;
-
-export default reducer;
-export const userProfileSlice = slice
+} = actions
+export default reducer

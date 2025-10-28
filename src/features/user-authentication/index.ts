@@ -1,2 +1,3 @@
-export * from "./user-authentication-component";
+export * from "./user-authentication-container";
 export * from "./user-authentication-reducer";
+

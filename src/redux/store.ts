@@ -1,10 +1,11 @@
-import { userAuthenticationSlice } from '@/features';
+import { userAuthenticationSlice } from '@/features/user-authentication/user-authentication-reducer';
 import { configureStore } from '@reduxjs/toolkit';
 import {
   FLUSH,
   PAUSE,
   PERSIST,
-  persistReducer, PURGE,
+  persistReducer,
+  PURGE,
   REGISTER,
   REHYDRATE
 } from "redux-persist";

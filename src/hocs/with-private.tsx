@@ -10,9 +10,7 @@ export const withPrivate = (WrappedComponent: React.ElementType) => {
 
   const connector = connect(mapStateToProps);
 
-  type Props = ConnectedProps<typeof connector>;
-
-  const AuthWrapper = (props: Props) => {
+  const AuthWrapper = (props: ConnectedProps<typeof connector>) => {
     const router = useRouter();
     const { isAuthenticated } = props;
 
