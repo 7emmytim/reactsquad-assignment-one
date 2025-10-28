@@ -11,9 +11,7 @@ export default function App({ Component, pageProps }: AppProps) {
   const persistorRef = useRef<Persistor>(undefined);
 
   if (!storeRef.current) {
-    // Create the store instance the first time this renders
     storeRef.current = makeStore();
-    // Create persistor based on that same store
     persistorRef.current = persistStore(storeRef.current);
   }
 
