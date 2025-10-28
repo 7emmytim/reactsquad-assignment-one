@@ -1,24 +1,25 @@
 import { call, put, takeEvery } from "redux-saga/effects";
-import { fetchUserProfileFailure, fetchUserProfileRequest, fetchUserProfileSuccess } from "./user-profile-reducer";
+import {
+  fetchUserProfileFailure,
+  fetchUserProfileRequest,
+  fetchUserProfileSuccess
+} from "./user-profile-reducer";
+import { fetchUserProfileApi } from "./user-profile.api";
 
-function* handleFetchData(): Generator<unknown> {
+// --- HANDLER ---
+function* handleFetchUserProfile(): Generator {
   try {
-    const data = yield call(fetchDataApi)
+    const data = yield call(fetchUserProfileApi)
     yield put(fetchUserProfileSuccess(data))
   } catch (error) {
-    // const message = error.message
-    yield put(fetchUserProfileFailure("Error"));
+    const message =
+      error instanceof Error ? error.message : "Unknown error occurred";
+
+    yield put(fetchUserProfileFailure(message));
   }
 }
 
-export function* watchFetchUserProfileData() {
-  yield takeEvery(fetchUserProfileRequest.type, handleFetchData);
+// --- WATCHER ---
+export function* watchFetchUserProfile() {
+  yield takeEvery(fetchUserProfileRequest.type, handleFetchUserProfile);
 }
-
-export const fetchDataApi = async () => {
-  const response = await fetch('https://jsonplaceholder.typicode.com/users/1');
-  if (!response.ok) {
-    throw new Error('Failed to fetch data');
-  }
-  return response.json();
-};

@@ -1,3 +1,5 @@
 import { SignIn } from "@/features";
+import { withLayout, withPublic } from "@/hocs";
+import { compose } from "ramda";
 
-export default SignIn;
+export default compose(withPublic, withLayout)(SignIn);

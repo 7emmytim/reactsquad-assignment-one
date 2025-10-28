@@ -1,3 +1,5 @@
 import { Home } from "@/features";
+import { withLayout, withPublic } from "@/hocs";
+import { compose } from "ramda";
 
-export default Home;
+export default compose(withPublic, withLayout)(Home);

@@ -1,6 +1,6 @@
-import { watchFetchUserProfileData } from "@/features";
-import { all } from "redux-saga/effects";
+import { watchFetchUserProfile } from "@/features";
+import { all, fork } from "redux-saga/effects";
 
 export function* rootSaga() {
-  yield all([watchFetchUserProfileData()]);
+  yield all([fork(watchFetchUserProfile)]);
 }

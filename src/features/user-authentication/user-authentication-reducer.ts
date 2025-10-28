@@ -1,7 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const slice = "userAuthentication"
-const initialState = { email: "", isAuthenticated: false }
+const initialState: {
+  email: string | null;
+  isAuthenticated: boolean
+} = { email: null, isAuthenticated: false }
 
 export const {
   actions,
@@ -10,13 +13,13 @@ export const {
   name: slice,
   initialState,
   reducers: {
-    login: (state, { payload }) => {
+    login: (state, action) => {
+      state.email = action.payload
       state.isAuthenticated = true;
-      state.email = payload;
     },
     logout: (state) => {
+      state.email = null;
       state.isAuthenticated = false;
-      state.email = "";
     },
   },
 });
